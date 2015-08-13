@@ -1,0 +1,43 @@
+<% @page_title = "My locations public" %>
+<div class="index">
+	<h1 id="where-is">Where is Ben?</h1>
+	<p id="is-in">Ben is in...</p>
+	<% @locations.each do |f| %>
+		<% if f == @locations.first %>
+			<p  id="current-location"><%= f.name %></p>
+		<% end %>
+	<% end %>
+	<div id="mapholder">
+  		<div id="map"></div>
+	</div>
+	<script>
+		handler = Gmaps.build('Google', { markers: { clusterer: undefined  } });
+		handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	 	 	markers = handler.addMarkers(<%=raw @hash.to_json %>);
+	    handler.bounds.extendWith(markers);
+  		handler.fitMapToBounds();
+  		//handler.getMap().setZoom(10);
+		});
+	</script>
+	</br>
+	<p id="was-in">Ben was in: </p>
+	</br>
+	<table class="table">
+		<tr>
+			<th>Order</th>
+			<th>Location</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Date</th>
+		</tr>
+		<% @locations.each do |f| %>
+		<tr>
+			<td><%= f.position %></td>
+			<td><%= f.name %></td>
+			<td><%= f.latitude %></td>
+			<td><%= f.longitude %></td>
+			<td><%= f.created_at %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>

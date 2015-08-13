@@ -1,0 +1,13 @@
+<div class="locations edit">
+  <h2>Update Location</h2>
+
+  <%= form_for(:location, :url => {:action => 'update', :id => @location.id}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Update Location") %>
+    </div>
+
+  <% end %>
+</div>

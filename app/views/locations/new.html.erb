@@ -1,0 +1,13 @@
+<div class="locations new">
+  <h2>Add Location</h2>
+
+  <%= form_for(:location, :url => {:action => 'create'}) do |f| %>
+
+    <%= render(:partial => "form", :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= submit_tag("Add Location") %>
+    </div>
+
+  <% end %>
+</div>

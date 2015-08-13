@@ -1,0 +1,59 @@
+<% @page_title = "My locations admin" %>
+
+<script type="text/javascript">
+
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(success);
+	} else {
+	  error('Geo Location is not supported');
+	}
+
+	function success(position) {
+		var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    //window.alert(latitude + ", " + longitude);
+    document.getElementById("out").innerHTML = latitude + ", " + longitude;
+		$.post('/locations/index',{lat: position.coords.latitude, lng: position.coords.longitude});
+	}
+	    
+</script>
+
+<p id="out"></p>
+
+<%= link_to("Back to Map", {:controller => 'public'}, :class => 'action new') %></br>
+<div class="index">
+	<h1>Admin</h1>
+
+	<%= link_to("Manually Add New Location", {:action => 'new'}, :class => 'action new') %></br>
+
+	<%= link_to("Automatically Add New Location", {:action => 'auto'}, :class => 'action new')%></br>
+
+	<p>Latitude: <%= @latitude %></p>
+
+	<table class="table">
+		<tr>
+			<th>Order</th>
+			<th>Location</th>
+			<th>IP</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Date</th>
+			<th>Actions</th>
+		</tr>
+		<% @locations.each do |f| %>
+		<tr>
+			<td><%= f.position %></td>
+			<td><%= f.name %></td>
+			<td><%= f.ip %></td>
+			<td><%= f.latitude %></td>
+			<td><%= f.longitude %></td>
+			<td><%= f.created_at %></td>
+			<td class="actions">
+        <%= link_to("Edit", {:action => 'edit', :id => f.id}, :class => 'action edit') %>
+        <%= link_to("Delete", {:action => 'delete', :id => f.id}, :class => 'action delete') %>
+      </td>
+		</tr>
+		<% end %>
+	</table>
+
+</div>

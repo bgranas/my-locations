@@ -1,0 +1,23 @@
+<table summary="Location form fields">
+  <tr>
+    <th><%= f.label(:position, "Position") %></th>
+    <td><%= f.select(:position, 1..@location_count) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:name, "Name") %></th>
+    <td><%= f.text_field(:name) %></td>
+  </tr>
+
+  <tr>
+    <th><%= f.label(:ip, "IP") %></th>
+    <td><%= f.text_field(:ip) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:latitude, "Latitude") %></th>
+    <td><%= f.text_field(:latitude) %></td>
+  </tr>
+  <tr>
+    <th><%= f.label(:longitude, "Longitude") %></th>
+    <td><%= f.text_field(:longitude) %></td>
+  </tr>
+</table>
